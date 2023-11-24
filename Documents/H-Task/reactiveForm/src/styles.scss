@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+.p-dropdown {
+  width: 100%;
+}
+.p-inputtext {
+  width: 100%;
+}
+.p-calendar {
+  width: 100%;
+}
+.p-element{
+  position: relative;
+  // left: 0;
+  right: 0;
+}
+
+
+.p-sidebar{
+  width: 400px;
+}
+
+.p-button{
+  margin-right: 5px;
+  border-radius: 5px;
+  margin-left: 5PX;
+  margin-top: 5PX;
+
+}
+.p-datatable-tbody > tr > td ,th{
+text-align: center;
+}

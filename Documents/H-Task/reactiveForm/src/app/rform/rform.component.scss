@@ -1,0 +1,33 @@
+.main {
+  // width: 100vw;
+  // height: 100vh;
+  display: flex;
+//   background-color: aqua;    
+//   justify-content: flex-end;
+  align-items: center;
+  .container {
+    width: 100%;
+    height: 75%;
+    padding: 10px;
+    position: relative;
+//   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  form{ box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;}
+    .form {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    
+    span{
+    .text-danger{
+        color: red;
+     position: absolute;   
+    }
+  }
+    }
+  .btn{
+    display: flex;
+    justify-content: end;
+  }
+ 
+  }
+}

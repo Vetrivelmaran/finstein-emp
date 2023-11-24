@@ -1,0 +1,186 @@
+<p-sidebar [(visible)]="sidebarVisible2" (onHide)="formoff()" (click)="sub()" position="right">
+  <h3>user data</h3>
+  <div class="main">
+    <div class="container">
+      <form [formGroup]="user">
+        <div class="form">
+          <label for="">NAME</label>
+          <input
+            type="text"
+            placeholder="name"
+            pInputText
+            formControlName="name"
+          />
+          <span *ngIf="form['name'].touched && form['name'].invalid">
+            <p class="text-danger">*name is required</p>
+          </span>
+        </div>
+        <div class="form">
+          <label for="">mobile</label>
+          <input
+            type="number"
+            placeholder="mobile"
+            pInputText
+            formControlName="mobile"
+          />
+          <!-- validation for mobile number  -->
+          <!-- <span *ngIf="form['mobile'].touched && form['mobile'].invalid">
+            <p class="text-danger">*mobile number is required</p>
+            <p class="text-danger"   >*mobile number should be in 10 digits</p>
+          </span> -->
+          <span
+            *ngIf="user.get('mobile')?.touched && user.get('mobile')?.invalid"
+          >
+            <p
+              class="text-danger"
+              *ngIf="user.get('mobile')?.errors?.['required']"
+            >
+              * Mobile number is required
+            </p>
+            <p
+              class="text-danger"
+              *ngIf="user.get('mobile')?.hasError('pattern')"
+            >
+              * Mobile number should be in 10 digits
+            </p>
+          </span>
+        </div>
+        <div class="form">
+          <label for="">gender</label>
+          <p-dropdown
+            formControlName="gender"
+            [options]="gender"
+            optionLabel="name"
+            placeholder="Select a City"
+          ></p-dropdown>
+          <span *ngIf="form['gender'].touched && form['gender'].invalid">
+            <p class="text-danger">*gender is required</p>
+          </span>
+        </div>
+        <div class="form">
+          <label for="">DOB</label>
+          <p-calendar class="dbo" formControlName="date"></p-calendar>
+          <span *ngIf="form['date'].touched && form['date'].invalid">
+            <p class="text-danger">*DOB is required</p>
+          </span>
+        </div>
+
+        <div class="form">
+          <label for="">description</label>
+          <textarea
+            rows="5"
+            cols="2"
+            pInputTextarea
+            formControlName="note"
+            placeholder="Enter description"
+          ></textarea>
+          <span *ngIf="form['note'].touched && form['note'].invalid">
+            <p class="text-danger">*description is required</p>
+          </span>
+        </div>
+
+        <div class="btn" >
+          <!-- <p-button label="submit"></p-button> -->
+
+          <p-toast></p-toast>
+          
+          <p-button
+           
+            (click)="confirm1()"
+            icon="pi pi-check"
+            label="Confirm"
+            *ngIf="submitbtn"
+          ></p-button>
+          <p-button label="update" severity="success" *ngIf="update" ></p-button>
+        </div>
+
+        <!-- <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages> -->
+      </form>
+    </div>
+  </div>
+</p-sidebar>
+
+<p-button
+  type="button"
+  class="mr-2"
+  (click)="sidebarVisible2 = true"
+  label="+ADD"
+
+></p-button>
+
+
+
+<!-- confirmation -->
+<p-confirmDialog #cd [style]="{ width: '50vw' }">
+  <ng-template pTemplate="header">
+    <h3>Header Content</h3>
+  </ng-template>
+  <ng-template pTemplate="icon">
+    <i class="pi pi-user"></i>
+  </ng-template>
+  <ng-template pTemplate="message">
+    <p>Message Template</p>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      class="br"
+      type="button"
+      pButton
+      icon="pi pi-times"
+      label="No"
+      (click)="cd.reject()"
+    ></button>
+    <button
+      class="br"
+      type="button"
+      pButton
+      icon="pi pi-check"
+      label="Yes"
+      (click)="cd.accept()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
+
+
+<!-- tabel data -->
+<div class="card">
+  <p-table [value]="formData"  dataKey="id" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="width: 4rem">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th>S.NO</th>
+              <th>NAME</th>
+              <th>MOBILE</th>
+              <th>DOB</th>
+            
+              <th>gender</th>
+              <th>NOTE</th>
+              <th>option</th>
+
+
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-formData>
+          <tr>
+              <td>
+                  <p-tableCheckbox [value]="formData"></p-tableCheckbox>
+              </td>
+              <td>{{formData.id}}</td>
+              <td>{{formData.name}}</td>
+              <td>{{formData.mobile}}</td>
+              <td>{{formData.date}}</td>
+              <td>{{formData.gender}}</td>
+              <td>{{formData.note}}</td>
+              <td> <p-button
+                (click)="edit()"
+                icon="pi 
+                pi-pencil"
+                label="edit"
+              ></p-button> <p-button label="delete" (click)="delete()" severity="danger"></p-button>   </td>
+            
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
