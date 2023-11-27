@@ -52,6 +52,7 @@
             [options]="gender"
             optionLabel="name"
             placeholder="Select a City"
+            optionValue="id"
           ></p-dropdown>
           <span *ngIf="form['gender'].touched && form['gender'].invalid">
             <p class="text-danger">*gender is required</p>
@@ -59,8 +60,8 @@
         </div>
         <div class="form">
           <label for="">DOB</label>
-          <p-calendar class="dbo" formControlName="date"></p-calendar>
-          <span *ngIf="form['date'].touched && form['date'].invalid">
+          <p-calendar class="dbo" formControlName="dob"></p-calendar>
+          <span *ngIf="form['dob'].touched && form['dob'].invalid">
             <p class="text-danger">*DOB is required</p>
           </span>
         </div>
@@ -91,7 +92,7 @@
             label="Confirm"
             *ngIf="submitbtn"
           ></p-button>
-          <p-button label="update" severity="success" *ngIf="update" ></p-button>
+          <p-button label="update"  severity="success" *ngIf="update" ></p-button>
         </div>
 
         <!-- <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages> -->
@@ -107,11 +108,17 @@
   label="+ADD"
 
 ></p-button>
+<!-- <p-button
+  type="button"
+  class="mr-2"
+  (click)="getUser()"
+  label="getUser"
 
+></p-button> -->
 
 
 <!-- confirmation -->
-<p-confirmDialog #cd [style]="{ width: '50vw' }">
+<p-confirmDialog [style]="{ width: '50vw' }">
   <ng-template pTemplate="header">
     <h3>Header Content</h3>
   </ng-template>
@@ -121,7 +128,7 @@
   <ng-template pTemplate="message">
     <p>Message Template</p>
   </ng-template>
-  <ng-template pTemplate="footer">
+  <!-- <ng-template pTemplate="footer">
     <button
       class="br"
       type="button"
@@ -136,15 +143,15 @@
       pButton
       icon="pi pi-check"
       label="Yes"
-      (click)="cd.accept()"
+      (click)="accept()"
     ></button>
-  </ng-template>
+  </ng-template> -->
 </p-confirmDialog>
 
 
 <!-- tabel data -->
 <div class="card">
-  <p-table [value]="formData"  dataKey="id" [tableStyle]="{'min-width': '50rem'}">
+  <p-table [value]="getuser"  dataKey="id" [scrollable]="true" scrollHeight="700px" selectionMode="single" [tableStyle]="{'min-width': '50rem'}">
       <ng-template pTemplate="header">
           <tr>
               <th style="width: 4rem">
@@ -162,24 +169,25 @@
 
           </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-formData>
+      <ng-template pTemplate="body" let-getuser>
           <tr>
               <td>
-                  <p-tableCheckbox [value]="formData"></p-tableCheckbox>
+                  <p-tableCheckbox [value]="getuser"></p-tableCheckbox>
               </td>
-              <td>{{formData.id}}</td>
-              <td>{{formData.name}}</td>
-              <td>{{formData.mobile}}</td>
-              <td>{{formData.date}}</td>
-              <td>{{formData.gender}}</td>
-              <td>{{formData.note}}</td>
+              <td>{{getuser.id}}</td>
+              <td>{{getuser.name}}</td>
+              <td>{{getuser.mobile}}</td>
+              <td>{{getuser.dob | date:'yyyy-MM-dd'}}</td>
+              <td>{{getuser.gender}}</td>
+              <td>{{getuser.note}}</td>
               <td> <p-button
-                (click)="edit()"
+                (click)="edit(getuser.id)"
                 icon="pi 
                 pi-pencil"
                 label="edit"
+                (click)="getbyid(getuser.id)"
               ></p-button> <p-button label="delete" (click)="delete()" severity="danger"></p-button>   </td>
-            
+                
           </tr>
       </ng-template>
   </p-table>

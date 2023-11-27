@@ -14,8 +14,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {ConfirmationService,MessageService} from 'primeng/api'
 import {ToastModule} from 'primeng/toast'
 import { SidebarModule } from 'primeng/sidebar';
-import { ArrService } from './arr.service';
+
 import { TableModule } from 'primeng/table';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent, RformComponent],
   imports: [
@@ -29,10 +30,11 @@ import { TableModule } from 'primeng/table';
     BrowserAnimationsModule,
     ButtonModule,
     MessagesModule,
-    ConfirmDialogModule,ToastModule,SidebarModule
+    ConfirmDialogModule,ToastModule,SidebarModule,
+    HttpClientModule
     
   ],
-  providers: [ConfirmationService, MessageService,ArrService],
+  providers: [ConfirmationService, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
